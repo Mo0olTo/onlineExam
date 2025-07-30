@@ -2,12 +2,14 @@ export interface Iauth {
      message: string;
   token: string;
   user: User;
-    oldPassword: string;
+  oldPassword: string;
   password: string;
   rePassword: string;
   resetCode: string;
   newPassword: string;
   info: string;
+  email: string;
+  status:string;
 
 }
 

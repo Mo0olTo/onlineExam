@@ -21,9 +21,11 @@ export class SignUpComponent implements OnInit ,AfterViewInit{
   private readonly flowbiteService=inject(FlowbiteService);
   private readonly authApiService=inject(AuthApiService)
   private readonly router=inject(Router)
+  private readonly toastrService=inject(ToastrService)
   
 
 
+  msgSucces:string=''
 
   isLoading:boolean=false;
 
@@ -62,16 +64,22 @@ export class SignUpComponent implements OnInit ,AfterViewInit{
        this.isLoading=true
       this.authApiService.register(this.registerForm.value).subscribe({
         next:(res)=>{
-          console.log(res);
 
+          if(res.message==='success'){
+            console.log(res);
           setTimeout(() => {
             this.router.navigate(['/signin'])
           }, 2000);
 
+          }
+          this.toastrService.success(res.message , 'Onilne Exam') , {timeOut:4000}
           this.isLoading=false
 
         },error:(err)=>{
           console.log(err);
+          if(err){
+            this.toastrService.error(err.error.message , 'Online Exam') , {timeOut:3000}
+          }
           this.isLoading=false
         }
       })

@@ -1,5 +1,6 @@
 import { Observable } from "rxjs";
 import { Iauth } from "../interface/iauth";
+import { IUsers } from "../interface/iusers";
 
 export abstract class AllAuthApi {
        
@@ -10,9 +11,10 @@ export abstract class AllAuthApi {
     abstract editProfile(data:Iauth):Observable<Iauth>;
     abstract logOut(data:Iauth):Observable<Iauth>;
     abstract loggedUserInfo(data:Iauth):Observable<Iauth>;
-    abstract forgotPassword(data:Iauth):Observable<Iauth>;
-    abstract verifyCode(data:Iauth):Observable<Iauth>;
-    abstract resetPass(data:Iauth):Observable<Iauth>;
+    abstract forgotPassword(data:IUsers):Observable<any>;
+    abstract verifyCode(data:IUsers):Observable<Iauth>;
+    abstract resetPass(data:IUsers):Observable<Iauth>;
+    abstract saveUserData():void;
 
     
 }

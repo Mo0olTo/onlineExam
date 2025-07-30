@@ -14,12 +14,21 @@ export class AuthApiAdaptorService implements Adaptor {
       message:data.message ,
       token:data.token ,
       email:data.user.email,
-      role:data.user.role ,
+     
+      role:data.user.role,
       username:data.user.username ,
       firstname:data.user.firstName ,
       lastname:data.user.lastName ,
       info:data.info,
+      status:data.status
 
     }
   }
+
+  adapt2(data:any):any{
+    return{
+       email:data.email,
+    }
+  }
+
 }
