@@ -1,12 +1,13 @@
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { AuthUIComponent } from "../../../shared/ui/auth-ui/auth-ui.component";
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FlowbiteService } from '../../../core/services/flowbite.service';
 import { initFlowbite } from 'flowbite';
 import { AuthApiService } from 'auth-api';
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
+import { isPlatformBrowser } from '@angular/common';
 
 
 @Component({
@@ -22,6 +23,8 @@ export class SignInComponent implements OnInit ,AfterViewInit {
   private readonly flowbiteService=inject(FlowbiteService) 
   private readonly authApiService=inject(AuthApiService) 
   private readonly toastrService=inject(ToastrService) 
+  private readonly router=inject(Router) 
+  private readonly plat_id=inject(PLATFORM_ID) 
 
 
 
@@ -38,8 +41,12 @@ export class SignInComponent implements OnInit ,AfterViewInit {
 
 
   ngAfterViewInit(): void {
-       this.flowbiteService.loadFlowbite((flowbite)=>{})
-           initFlowbite();
+
+    if (isPlatformBrowser(this.plat_id)) {
+      this.flowbiteService.loadFlowbite((flowbite)=>{})
+           initFlowbite(); 
+    }
+       
   }
 
 
@@ -61,7 +68,10 @@ export class SignInComponent implements OnInit ,AfterViewInit {
             console.log(res);
             if (res.message === 'success') {
               setTimeout(() => {
-                localStorage.setItem('userToken' , res.token)
+                localStorage.setItem('onlineExamToken' , res.token)
+                this.authApiService.saveUserData()
+
+                this.router.navigate(['/dashBoard'])
               }, 2000);
 
               this.toastrService.success( res.message , "Login Succes Welcome to Online Exam")

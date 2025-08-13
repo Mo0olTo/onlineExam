@@ -73,8 +73,8 @@ export class AuthApiService implements AllAuthApi  {
    }
 
   saveUserData(): void {
-          if (localStorage.getItem('userToken')!==null) {
-            this.userData= jwtDecode(localStorage.getItem('userToken')!)
+          if (localStorage.getItem('onlineExamToken')!==null) {
+            this.userData= jwtDecode(localStorage.getItem('onlineExamToken')!)
             console.log(this.userData);
             
             

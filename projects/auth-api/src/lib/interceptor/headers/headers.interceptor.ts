@@ -7,11 +7,11 @@ export const headersInterceptor: HttpInterceptorFn = (req, next) => {
    const _PLATFORM_ID=inject(PLATFORM_ID)
 
   if (isPlatformBrowser(_PLATFORM_ID)) {
-     if (localStorage.getItem('userToken')!==null) {
+     if (localStorage.getItem('onlineExamToken')!==null) {
 
     req=req.clone({
       setHeaders:{
-        token :localStorage.getItem('userToken')!
+        token :localStorage.getItem('onlineExamToken')!
       }
     })
     
