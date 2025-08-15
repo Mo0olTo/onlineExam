@@ -75,7 +75,7 @@ export class SignInComponent implements OnInit ,AfterViewInit {
               }, 2000);
 
               this.toastrService.success( res.message , "Login Succes Welcome to Online Exam")
-              this.authApiService.saveUserData();
+              
             } 
 
             this.isLoading=false

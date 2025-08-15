@@ -22,7 +22,7 @@ export class MainlayoutComponent implements AfterViewInit {
         
     if (isPlatformBrowser(this.plat_id)) {
       this.flowbiteService.loadFlowbite((flowbite)=>{})
-           initFlowbite(); 
+           
     }
     }
 

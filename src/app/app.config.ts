@@ -9,25 +9,32 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { headersInterceptor } from '../../projects/auth-api/src/lib/interceptor/headers/headers.interceptor';
+
+import { provideStore } from '@ngrx/store';
+import { subjectReducer } from './store/subjects.reducer';
+import { headersInterceptor } from './core/interceptors/headers.interceptor';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
-    provideHttpClient(withFetch() , withInterceptors([headersInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([headersInterceptor])),
+    importProvidersFrom(NgxSpinnerModule),
+    provideRouter(routes),
+    provideAnimations(),
+    provideAnimationsAsync(),
+    provideToastr(),
+    providePrimeNG({
+        theme: {
+            preset: Aura
+        }
+    }),
+    provideClientHydration(withEventReplay()),
+    
+    provideStore(
+        {
+            subjects:subjectReducer,
+        }
+    )
 
-      importProvidersFrom(NgxSpinnerModule),
-     provideRouter(routes),
-
-     provideAnimations(),
-     provideAnimationsAsync(), 
-     provideToastr(),
-
-
-        providePrimeNG({
-            theme: {
-                preset: Aura
-            }
-        }),
-
-      provideClientHydration(withEventReplay())]
+]
 };
