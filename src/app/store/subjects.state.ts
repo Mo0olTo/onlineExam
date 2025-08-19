@@ -12,7 +12,7 @@ export interface SubjectsState{
 
 export const initialSubjectsState : SubjectsState =  { 
 
-   subjects : [] ,
+    subjects : [] as Subject[] ,
     isLoading :false , 
     error :null
 

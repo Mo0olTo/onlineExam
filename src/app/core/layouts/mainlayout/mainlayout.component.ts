@@ -3,11 +3,12 @@ import { AfterViewInit, Component, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { initFlowbite } from 'flowbite';
 import { FlowbiteService } from '../../services/flowbite.service';
+import { SearchbarComponent } from "../../../shared/ui/auth-ui/searchbar/searchbar.component";
 
 
 @Component({
   selector: 'app-mainlayout',
-  imports: [RouterOutlet,RouterLinkActive,RouterLink],
+  imports: [RouterOutlet, RouterLinkActive, RouterLink, SearchbarComponent],
   templateUrl: './mainlayout.component.html',
   styleUrl: './mainlayout.component.scss'
 })

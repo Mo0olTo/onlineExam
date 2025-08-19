@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../core/environment/env-baseUrl';
 import { Observable } from 'rxjs';
 import { Isubjects } from '../../interfaces/isubjects';
-import { Subject } from '../../../store/subjects.model';
+import { Subject, SubjectsResponse } from '../../../store/subjects.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +14,14 @@ export class SubjectsService {
 
 
 
-  getAllSubjects():Observable<Subject[]>{
-    return this.httpClient.get<Subject[]>(`${environment.baseUrl}subjects`,
+  getAllSubjects():Observable<SubjectsResponse>{
+    return this.httpClient.get<SubjectsResponse>(`${environment.baseUrl}subjects`,
       
      )
   }
+
+
+  
+
+    
 }

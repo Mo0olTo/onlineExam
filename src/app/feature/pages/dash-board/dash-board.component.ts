@@ -8,11 +8,12 @@ import* as subjectsSelctors from './../../../store/subjects.selctors';
 import { Observable } from 'rxjs';
 
 import { Subject, SubjectsResponse } from '../../../store/subjects.model';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-dash-board',
-  imports: [AsyncPipe],
+  imports: [AsyncPipe ,RouterLink],
   templateUrl: './dash-board.component.html',
   styleUrl: './dash-board.component.scss'
 })
@@ -25,7 +26,8 @@ export class DashBoardComponent implements AfterViewInit ,OnInit {
 
 
   subjectList$!:Observable<Subject[]>
-    subjectList:any= []
+   getAllsubjectList$!:Observable<Subject[]>
+   getAll:number=0
 
   
 
@@ -41,7 +43,8 @@ export class DashBoardComponent implements AfterViewInit ,OnInit {
 
     ngOnInit(): void {
         this.loadSubjects()
-      this.getAllSubjects()
+      this.getAllSubjects() 
+   
        
    
     }
@@ -53,10 +56,13 @@ export class DashBoardComponent implements AfterViewInit ,OnInit {
     loadSubjects(){
       this.subjectsService.getAllSubjects().subscribe({
         next:(res)=>{
-          
+            console.log(res);
+              if (res.message === 'success') {
+                this.store.dispatch(subjectsActions.setSubjects({AllSubs:res.subjects}))
+              }
           //TODO : Dispatch setProducts
-          this.store.dispatch(subjectsActions.setSubjects({subjects:res}))
-          console.log({subjects:res});
+          // this.store.dispatch(subjectsActions.setSubjects({AllSubs:res}))
+          // console.log({Allsubs:res});
           
         }
       })
@@ -68,13 +74,17 @@ export class DashBoardComponent implements AfterViewInit ,OnInit {
 
     getAllSubjects():void{
     this.subjectList$= this.store.select(subjectsSelctors.selectAllSubjects)
-   
+      this.getAll=0
        console.log(this.subjectList$);
        
-       
-
-      
     }
+
+    clickTogetAll():void{
+    
+      this.getAllsubjectList$= this.store.select(subjectsSelctors.selectAllSubjects)
+        this.getAll=1
+    }
+
 
 
 

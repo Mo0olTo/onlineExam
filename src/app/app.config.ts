@@ -13,6 +13,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideStore } from '@ngrx/store';
 import { subjectReducer } from './store/subjects.reducer';
 import { headersInterceptor } from './core/interceptors/headers.interceptor';
+import { examsReducer } from './store/Exams/exams.reducer';
 
 
 export const appConfig: ApplicationConfig = {
@@ -33,6 +34,7 @@ export const appConfig: ApplicationConfig = {
     provideStore(
         {
             subjects:subjectReducer,
+            Exams :examsReducer
         }
     )
 

@@ -11,10 +11,10 @@ export const subjectReducer = createReducer(initialSubjectsState,
     })) ,
 
 
-on(setSubjects , (state, {subjects}) =>({
+on(setSubjects , (state, {AllSubs}) =>({
     ...state , 
-    subjects,
-    isLoading:false
+    subjects : AllSubs,
+   
 })
 
 

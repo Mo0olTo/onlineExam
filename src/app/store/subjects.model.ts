@@ -14,5 +14,5 @@ export interface Metadata {
 export interface SubjectsResponse {
   message: string;
   metadata: Metadata;
-  subjects: Subject;
+  subjects: Subject[];
 }
