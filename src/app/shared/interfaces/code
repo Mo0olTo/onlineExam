@@ -1,0 +1,211 @@
+            <p-step-panel [value]="2">
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-48">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            Content II
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                        <p-button label="Back"  severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(1)" />
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(3)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+
+            <p-step-panel [value]="3">
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-48">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            Content III
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                       <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(2)" />
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(4)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+            <p-step-panel [value]="4">
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-48">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            Content III
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                         <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(3)" />
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(5)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+            <p-step-panel [value]="5">
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-48">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 
+                            dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            Content III
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                       <p-button  label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(4)" />
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(6)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+            <p-step-panel [value]="6">
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-48">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            Content III
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                        <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(5)" />
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(7)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+            <p-step-panel [value]="7">
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-48">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            Content III
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                       <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(6)" />
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(8)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+            <p-step-panel [value]="8">
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-48">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            Content III
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                       <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(7)" />
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(9)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+            <p-step-panel [value]="9">
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-48">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            Content III
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                       <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(8)" />
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(10)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+            <p-step-panel [value]="10">
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-48">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            Content III
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                        <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(9)" />
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(11)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+            <p-step-panel [value]="11">
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-48">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            Content III
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                        <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(10)" />
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(12)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+            <p-step-panel [value]="12">
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-48">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            Content III
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                        <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(11)" />
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(13)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+            <p-step-panel [value]="13">
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-48">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            Content III
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                       <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(12)" />
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(14)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+            <p-step-panel [value]="14">
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-48">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            Content III
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                        <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(13)" />
+                        <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(15)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>
+            <p-step-panel [value]="15">
+                <ng-template #content let-activateCallback="activateCallback">
+                    <div class="flex flex-col h-48">
+                        <div
+                            class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+                        >
+                            Content III
+                        </div>
+                    </div>
+                    <div class="flex pt-6 justify-between">
+                        <p-button label="Back" icon="pi pi-arrow-left" iconPos="right" (onClick)="activateCallback(14)" />
+                    </div>
+                </ng-template>
+            </p-step-panel>

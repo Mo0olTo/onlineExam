@@ -9,3 +9,29 @@ body{
 }
 
 
+::ng-deep .p-stepper .p-stepper-header.p-highlight .p-stepper-number {
+  background-color: #4461F2 !important;
+  border-color: #4461F2 !important;
+  color: #fff !important; 
+}
+
+
+::ng-deep .p-stepper .p-stepper-header.p-completed .p-stepper-number {
+  background-color: #4461F2 !important; 
+  border-color: #4461F2 !important;
+  color: #fff !important;
+}
+
+
+::ng-deep .p-stepper .p-stepper-header .p-stepper-number {
+  border-color: #4461F2 !important; 
+  color: #4461F2 !important;        
+}
+
+
+:root {
+  --p-primary-color: #4461F2 !important;
+  --p-primary-500: #4461F2 !important;
+  --p-primary-600: #4461F2 !important;
+  --p-primary-700: #4461F2 !important;
+}
