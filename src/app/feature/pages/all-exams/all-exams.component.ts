@@ -1,6 +1,6 @@
 
 
-import { AfterViewInit, Component, inject, OnInit, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, inject, OnDestroy, OnInit, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
 import { ExamsService } from '../../../shared/services/Exams/exams.service';
 import { Store } from '@ngrx/store';
 import* as examsActions from './../../../store/Exams/exams.actions'
@@ -59,11 +59,20 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
 
 
       examId!:any
-      finalScore:number=0
+
+      finalScore:number=0 
+
+      finalResults :{ 
+        finalScore:number 
+        incorrect:number 
+        percentage:number
+       } | null = null
     
     selectedAnswers: SelectedAnswers[] = []
 
 
+    examDuration!:number
+    timerInterval!: any;   
 
 
 
@@ -116,10 +125,12 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
     this.examsService.getExamById(id).subscribe({
       next:(res)=>{
         console.log(res , 'examid');
-        
+
         this.examId=res.exam._id
+
+        this.examDuration=res.exam.duration*60
         
-        this.LoadQuestions()
+        this.LoadQuestions() 
        
       }
     })
@@ -166,6 +177,9 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
         this.store.dispatch(AnswersActions.setAnswers({AllAnswers:allAnswers}))
        
         this.setAnswers()
+        this.startTimer()
+       
+        
       } 
     })
 
@@ -213,18 +227,17 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
 
 
 
-           if(this.selectedAnswers.length ===this.questionsArray.length){
-            const score = this.calculateResults(this.questionsArray , this.selectedAnswers)
-              this.finalScore=score
-
-           }
+         if (this.selectedAnswers.length === this.questionsArray.length) {
+          this.finalResults = this.calculateResults(this.questionsArray, this.selectedAnswers);
+          
+        }
           
            
              
     }
 
 
-    calculateResults(questions:Question[] , userAnswers:SelectedAnswers[]):number{
+    calculateResults(questions:Question[] , userAnswers:SelectedAnswers[]):{ finalScore: number; incorrect: number; percentage: number }{
 
       let finalScore = 0
 
@@ -236,24 +249,59 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
           finalScore++;
         }
       })
+
+        const total = questions.length 
+        const incorrect = total - finalScore
+        const percentage = Math.round((finalScore / total) *100)
+
          console.log("Final Score:", finalScore);
-      return finalScore;
+      return { finalScore, incorrect, percentage }
     }
 
 
     submitExam(): void {
 
-  this.store.select(AnswersSelectors.selectUserAnswers).subscribe(answers => {
-    const score = this.calculateResults(this.questionsArray, answers);
-    console.log("Final Score:", score);
-    this.finalScore = score;
-  });
-}
+        this.store.select(AnswersSelectors.selectUserAnswers).subscribe(answers => {
+          this.finalResults = this.calculateResults(this.questionsArray, answers);
+
+          console.log(" Final Result:", this.finalResults);
+      });
+    }
+
+    // timer CountDown
+    startTimer(): void {
+      // to reset CountDown timer every exam
+        if (this.timerInterval) {
+          clearInterval(this.timerInterval);
+        }
+
+        // starting CountDown
+    this.timerInterval = setInterval(() => {
+          if (this.examDuration > 0) {
+            this.examDuration--;
+          } else {
+            clearInterval(this.timerInterval);
+            this.submitExam();
+          }
+        }, 1000);
+      }
+
+
+     formatTime(seconds: number): string {
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        return `${m}:${s < 10 ? '0' + s : s}`;
+      }
+
+
+ 
+
 
     // PRIME Ng functions 
   
     visible: boolean = false;
     show:boolean =false;
+    results:boolean=false
 
 
     showDialog() {
@@ -264,5 +312,11 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
     this.visible=false
       this.show = true
    }
+
+   showResults(){
+    this.show=false
+    this.results=true
+   }
+   
 
 }
