@@ -6,6 +6,7 @@ import { exams } from '../../../store/Exams/exams.modal';
 import { env } from 'process';
 import { ExamsId } from '../../interfaces/exams-id';
 import { Question, Questions } from '../../interfaces/questions';
+import { checkAnswers, SelectedAnswers } from '../../interfaces/selected-answers';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,11 @@ private readonly httpClient=inject(HttpClient)
       return this.httpClient.get<Questions>(`${environment.baseUrl}questions?exam=${examId}`)
     }
 
+
+
+
+    checkAnswers(data:SelectedAnswers[]):Observable<checkAnswers>{
+      return this.httpClient.post<checkAnswers>(`${environment.baseUrl}questions/check` , {data})
+    }
 
 }

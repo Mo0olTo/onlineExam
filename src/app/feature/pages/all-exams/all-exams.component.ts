@@ -89,8 +89,6 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
 
     this.loadExams()
     this.getAllExams()
-      
-    
     
   }
 
@@ -213,13 +211,15 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
 
     onAnswerQuestion(questionId:string , answerKey:string):void{
 
-      const existAnswer = this.selectedAnswers.find((c)=> c.questionId === questionId)
+      const existAnswer = this.selectedAnswers.findIndex((c)=> c.questionId === questionId)
 
-      if(existAnswer){
-        existAnswer.answerKey = answerKey 
+      if(existAnswer > -1 ){
+       this.selectedAnswers = this.selectedAnswers.map((a, i) =>
+          i === existAnswer ? { ...a, answerKey } : a);
+       
       } else {
-        this.selectedAnswers.push({questionId , answerKey})
-        console.log(this.selectedAnswers);
+        this.selectedAnswers = [...this.selectedAnswers, { questionId, answerKey }];
+        console.log(this.selectedAnswers); 
       }
            
 
@@ -231,10 +231,23 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
           this.finalResults = this.calculateResults(this.questionsArray, this.selectedAnswers);
           
         }
-          
-           
-             
+       
+    } 
+
+
+    
+    // save Previous answer
+    isAnswerSelected(questId:string , answerKey:string):boolean{
+      return this.selectedAnswers.some(ans => ans.questionId === questId && ans.answerKey === answerKey)
     }
+
+
+    // disable button till user answer 
+    isQuestionAnswered(questId:string):boolean{
+      return this.selectedAnswers.some(ans=> ans.questionId === questId)
+    }
+
+    
 
 
     calculateResults(questions:Question[] , userAnswers:SelectedAnswers[]):{ finalScore: number; incorrect: number; percentage: number }{
@@ -265,6 +278,16 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
           this.finalResults = this.calculateResults(this.questionsArray, answers);
 
           console.log(" Final Result:", this.finalResults);
+
+          this.examsService.checkAnswers(this.selectedAnswers).subscribe({
+            next:(res)=>{
+              console.log(res);
+              
+            } , error:(err)=>{
+              console.log(err);
+              
+            }
+          })
       });
     }
 
@@ -276,7 +299,7 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
         }
 
         // starting CountDown
-    this.timerInterval = setInterval(() => {
+        this.timerInterval = setInterval(() => {
           if (this.examDuration > 0) {
             this.examDuration--;
           } else {

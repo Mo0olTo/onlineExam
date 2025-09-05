@@ -161,7 +161,7 @@
         <div class="card flex justify-center">
     <p-stepper [value]="1"     class="w-[75%] sm:w-[90%] md:w-[40rem] lg:w-[50rem] overflow-x-auto p-8 ">
         <p-step-list  class="flex-nowrap ">
-                @for (step of [].constructor(15); track step; let i = $index) {
+                @for (step of [].constructor(questionsArray.length); track step; let i = $index) {
         <p-step 
           [value]="i+1"
           class="'flex items-center justify-center rounded-full  w-8 h-8 text-xs sm:w-10 sm:h-10 sm:text-sm md:w-12 md:h-12 md:text-base ">
@@ -195,6 +195,7 @@
                                      
                                         <input type="radio" [id]="ans.answer" 
                                              name="quetsion-{{quest._id}}"  
+                                             [checked]="isAnswerSelected(quest._id , ans.key)"
                                             (change)="onAnswerQuestion(quest._id , ans.key)"
                                         class="self-center text-[#02369C] focus:ring-blue-500 w-5 h-5  cursor-pointer" >
                                          <label [for]="ans.answer" class="text-lg font-[400] cursor-pointer  " > {{ans.answer}}</label>
@@ -213,19 +214,23 @@
                             icon="pi pi-arrow-left" (onClick)="activateCallback($index)"
                             />
                         }
-                        @if($index < questionsArray.length -1) {
+                        @if($index < questionsArray.length -1 ) {
                                 <p-button   
                                 class="bg-[]"
                                 label="Next"
                                 icon="pi pi-arrow-right"
                                 iconPos="right"
                                 (onClick)="activateCallback($index + 2)"
+                                
+                                [disabled]="!isQuestionAnswered(quest._id)"
+                                
                                 />
                         }
 
                         @if($index === questionsArray.length -1) {
                                <button (click)="submitExam()"  (click)="showResults()"
-                                         class="bg-[#4461F2]  font-[600] rounded-2xl px-3 md:px-8 py-1 text-lg text-white w-1/2"
+                                         class="bg-[#4461F2]  font-[600] rounded-2xl px-3 md:px-8 py-1 text-lg text-white w-1/2" 
+                                        
                                         >Submit Results</button>
                                 }
                                
@@ -261,9 +266,9 @@
                     <!-- Range Circle -->
                     <div class="relative flex items-center justify-center mb-6">
                     <svg class="w-32 h-32">
-                        <circle cx="64" cy="64" r="58" stroke="#E5E7EB" stroke-width="10" fill="none"/>
+                        <circle cx="64" cy="64" r="58" stroke="#F17F7F" stroke-width="10" fill="none"/>
                         <circle cx="64" cy="64" r="58" stroke="#3B82F6" stroke-width="10" fill="none" stroke-dasharray="365" [attr.stroke-dashoffset]="365 - (365 * finalResults.percentage / 100)" 
-                        stroke-linecap="round" class="transition-all duration-700" />
+                        stroke-linecap="round" class="transition-all duration-400" />
                     </svg>
                     <span class="absolute text-2xl font-bold">{{ finalResults.percentage }}%</span>
                     </div>
