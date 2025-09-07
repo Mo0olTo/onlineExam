@@ -126,6 +126,7 @@
 
 
 <!-- questions modal -->
+
  <div class="card flex justify-center w-[80%]">
     
     <p-dialog  [modal]="true" [(visible)]="show" class="w-full sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] max-w-[90%]">
@@ -158,8 +159,11 @@
 
         </div>
 
+        <!-- Stepper MODAL -->
+
+        
         <div class="card flex justify-center">
-    <p-stepper [value]="1"     class="w-[75%] sm:w-[90%] md:w-[40rem] lg:w-[50rem] overflow-x-auto p-8 ">
+    <p-stepper [value]="currentStep"     class="w-[75%] sm:w-[90%] md:w-[40rem] lg:w-[50rem] overflow-x-auto p-8 ">
         <p-step-list  class="flex-nowrap ">
                 @for (step of [].constructor(questionsArray.length); track step; let i = $index) {
         <p-step 
@@ -175,7 +179,7 @@
                 <ng-template #content let-activateCallback="activateCallback" >
 
               
-                    <div class="flex flex-col justify-between ">
+                    <div class="flex flex-col justify-center ">
                         <div 
                             class="flex-col flex justify-center items-start gap-6 "
                         >
@@ -211,7 +215,7 @@
                          @if($index > 0) {
                             <p-button
                             label="Back" severity="secondary"
-                            icon="pi pi-arrow-left" (onClick)="activateCallback($index)"
+                            icon="pi pi-arrow-left" (onClick)="currentStep=($index)"
                             />
                         }
                         @if($index < questionsArray.length -1 ) {
@@ -220,7 +224,7 @@
                                 label="Next"
                                 icon="pi pi-arrow-right"
                                 iconPos="right"
-                                (onClick)="activateCallback($index + 2)"
+                                (onClick)="currentStep=($index + 2)"
                                 
                                 [disabled]="!isQuestionAnswered(quest._id)"
                                 
@@ -270,7 +274,7 @@
                         <circle cx="64" cy="64" r="58" stroke="#3B82F6" stroke-width="10" fill="none" stroke-dasharray="365" [attr.stroke-dashoffset]="365 - (365 * finalResults.percentage / 100)" 
                         stroke-linecap="round" class="transition-all duration-400" />
                     </svg>
-                    <span class="absolute text-2xl font-bold">{{ finalResults.percentage }}%</span>
+                    <span class="absolute text-2xl font-bold">{{finalResults.percentage}}%</span>
                     </div>
 
                     <!-- Correct / Incorrect -->
@@ -293,6 +297,7 @@
                     <button
                         class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700"
                         (click)="showResults()"
+                        (click)="showWrongAnswers()"
                     >
                         Show results
                     </button>
@@ -304,7 +309,43 @@
     </p-dialog>
 
 
+    <p-dialog 
+            header="Exam Results" 
+            [(visible)]="showResultsModal" 
+            [modal]="true" 
+            [style]="{width: '70vw'}"
+            >
+            <h2 class="text-xl text-blue-600 font-bold mb-4">
+                Final Score: <span class="text-red-600"> {{ finalResults?.finalScore }}/{{ questionsArray.length }}
+                ({{ finalResults?.percentage }}%)</span>
+            </h2>
 
+            @for (quest of questionsArray; track quest._id) {
+                <div class="mb-6 border-[3px] rounded-lg my-4 p-3 ">
+
+                <h2 class="font-[500] text-red-600 bg-[#00000031] w-1/2 sm:w-1/3 md:w-1/4 2xl:w-1/6 rounded-xl px-2 py-1 my-2">Question <span class="text-red-700 ">{{$index+1}}</span></h2>
+
+                <h3 class="font-[500] mb-2">- {{ quest.question }}</h3>
+
+                @for (ans of quest.answers; track ans.key) {
+                    <div 
+                    class="p-2 rounded-lg mb-2"
+                    [class.bg-green-300]="ans.key === quest.correct"
+                    [class.bg-red-300]="showUserResults(quest._id, ans.key, quest.correct)"
+                    >
+                    {{ ans.answer }}
+                    </div>
+                }
+                </div>
+            }
+
+            <p-footer>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded" 
+                        (click)="showResultsModal = false">
+                Close
+                </button>
+            </p-footer>
+</p-dialog>
     
 
 

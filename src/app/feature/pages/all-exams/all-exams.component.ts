@@ -49,10 +49,7 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
 
 
     QuestionsList$!:Observable<Questions>
-
-
-    questionsArray!:Question[]
-
+    questionsArray:Question[]=[]
     
     answersList$!:Observable<Answer[]>
      answersArray:Answer[]=[]
@@ -70,6 +67,9 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
     
     selectedAnswers: SelectedAnswers[] = []
 
+    currentStep:number=1  
+
+    showResultsModal: boolean = false;
 
     examDuration!:number
     timerInterval!: any;   
@@ -78,18 +78,17 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
 
     
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit():void {
 
-       if (isPlatformBrowser(this.plat_id)) {
-      this.flowbiteService.loadFlowbite((flowbite)=>{})
-            initFlowbite();
-    }
+    if (isPlatformBrowser(this.plat_id)) {
+    this.flowbiteService.loadFlowbite(() => {
+      initFlowbite();
+    });
+  }
   }
   ngOnInit(): void {
-
     this.loadExams()
     this.getAllExams()
-    
   }
 
 
@@ -99,10 +98,7 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
        if(res.message === "success"){
         this.store.dispatch(examsActions.setExams({AllExams:res.exams}))
        }
-        
-        
-
-        
+ 
       }
     })
   }
@@ -120,6 +116,15 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
   
 
   startExam(id:string):void{
+
+    this.selectedAnswers=[]
+    this.finalResults=null
+
+    this.store.dispatch(AnswersActions.resetAnswers()) 
+
+    this.currentStep=1
+
+
     this.examsService.getExamById(id).subscribe({
       next:(res)=>{
         console.log(res , 'examid');
@@ -289,7 +294,14 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
             }
           })
       });
-    }
+    } 
+
+
+
+    showUserResults(questionId: string, answerKey: string, correctKey: string): boolean {
+      const userAnswer = this.selectedAnswers.find(a => a.questionId === questionId);
+      return userAnswer ? (userAnswer.answerKey === answerKey && userAnswer.answerKey !== correctKey) : false;
+    } 
 
     // timer CountDown
     startTimer(): void {
@@ -341,5 +353,8 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
     this.results=true
    }
    
+   showWrongAnswers():void{
+    this.showResultsModal=true
+   }
 
 }
