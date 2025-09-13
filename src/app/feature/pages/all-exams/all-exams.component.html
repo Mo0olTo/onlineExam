@@ -227,13 +227,12 @@
                                 (onClick)="currentStep=($index + 2)"
                                 
                                 [disabled]="!isQuestionAnswered(quest._id)"
-                                
-                                />
+                            />
                         }
 
                         @if($index === questionsArray.length -1) {
                                <button (click)="submitExam()"  (click)="showResults()"
-                                         class="bg-[#4461F2]  font-[600] rounded-2xl px-3 md:px-8 py-1 text-lg text-white w-1/2" 
+                                         class="bg-[#4461F2]   font-[600] rounded-2xl px-3 md:px-8 py-1 text-lg text-white w-1/2" 
                                         
                                         >Submit Results</button>
                                 }
@@ -295,7 +294,7 @@
                     <div class="flex justify-center mt-7">
                     
                     <button
-                        class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700"
+                        class="bg-blue-600 text-white px-7 py-2 rounded-full hover:bg-blue-700"
                         (click)="showResults()"
                         (click)="showWrongAnswers()"
                     >
