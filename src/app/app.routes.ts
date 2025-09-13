@@ -1,3 +1,4 @@
+import { RenderMode } from '@angular/ssr';
 import { Routes } from '@angular/router';
 
 import { AuthlayoutComponent } from './core/layouts/authlayout/authlayout.component';
@@ -26,7 +27,7 @@ export const routes: Routes = [
     { path:'' , component:MainlayoutComponent , canActivate:[(authGuardGuard)]   , title:'main' , children:[
 
         {path:'dashBoard', loadComponent:()=> import('./feature/pages/dash-board/dash-board.component').then((c)=>c.DashBoardComponent) , title:'DashBoard'} ,
-        {path:'quizes/:id' , loadComponent:()=>import('./feature/pages/quizes/quizes.component').then((c)=>c.QuizesComponent) , title: 'Quizes'} ,
+        {path:'quizes/:id' , loadComponent:()=>import('./feature/pages/quizes/quizes.component').then((c)=>c.QuizesComponent) , title: 'Quizes' , data: { renderMode: 'no-prerender' }} ,
         {path:'allExams' , loadComponent:()=>import('./feature/pages/all-exams/all-exams.component').then((c)=>c.AllExamsComponent) , title:'All Exams'}
         
     ]}
