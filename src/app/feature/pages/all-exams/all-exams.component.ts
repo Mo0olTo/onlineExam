@@ -162,7 +162,9 @@ export class AllExamsComponent implements OnInit , AfterViewInit {
       this.questionsArray = res.questions
      )
 
-      
+        
+
+     
    
 
     console.log(this.QuestionsList$ , "Questions List Here");
