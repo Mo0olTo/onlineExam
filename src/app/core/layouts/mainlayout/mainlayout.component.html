@@ -28,7 +28,7 @@
 
 
         <a  class="flex ms-2  mb-4 sm:mb-14"> 
-          <img src="0b7894f3f9e34690bf0c8b5b2e5d087debd7b25e.png" class="h-8 me-3 invert" alt="FlowBite Logo" />
+          <img src="Ninja.png" class="h-12 w-full lg:ms-1" alt="Website Logo" />
           <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white"></span>
         </a>
 
@@ -70,14 +70,14 @@
       
   
       
-         <li>
+         <li class="">
             <a  class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-               <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900
+               <svg class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-[#2563EB]
                 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                    d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
                </svg>
-               <span class="flex-1 ms-3 whitespace-nowrap">Log Out</span>
+               <span (click)="signOut()" class="flex-1 ms-3 whitespace-nowrap cursor-pointer hover:text-[#2563EB]">Log Out</span>
             </a>
          </li>
 
