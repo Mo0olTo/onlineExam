@@ -4,6 +4,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { initFlowbite } from 'flowbite';
 import { FlowbiteService } from '../../services/flowbite.service';
 import { SearchbarComponent } from "../../../shared/ui/auth-ui/searchbar/searchbar.component";
+import { Exam } from '../../../store/Exams/exams.modal';
 
 
 @Component({
@@ -32,6 +33,12 @@ export class MainlayoutComponent implements AfterViewInit {
       localStorage.removeItem("onlineExamToken")
       this.router.navigate(['/signin'])
 
+    }
+
+    handleExamSelected(exam: Exam): void {
+      // Handle exam selection event
+      console.log('Exam selected:', exam);
+      // You can add custom logic here before navigation if needed
     }
 
 
