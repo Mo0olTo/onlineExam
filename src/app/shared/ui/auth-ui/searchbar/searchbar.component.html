@@ -36,7 +36,7 @@
                     class="w-full text-left px-4 py-3 hover:bg-blue-50 dark:hover:bg-gray-600 transition-colors"
                   >
                     <div class="font-semibold text-gray-900 dark:text-white">{{ exam.title }}</div>
-                    <div class="text-sm text-gray-600 dark:text-gray-300">{{ exam.subject }} • {{ exam.numberOfQuestions }} questions</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-300">{{ exam.duration + ' minutes' }} • {{ exam.numberOfQuestions }} questions</div>
                   </button>
                 </div>
                 <ng-template #noResults>
