@@ -86,7 +86,9 @@
 </aside>
 
 <div class="p-4 sm:ml-64">
-   <app-searchbar></app-searchbar>
+   <app-searchbar
+      (onExamSelected)="handleExamSelected($event)"
+   ></app-searchbar>
    
    <router-outlet></router-outlet>
 </div>

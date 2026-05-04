@@ -92,7 +92,7 @@
                     <div class="mb-5">
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                         <input formControlName="password" type="password" id="password" 
-                                              [class]="registerForm.get('password')?.errors
+                                              [class]="registerForm.get('password')?.errors && registerForm.get('password')?.touched
                                             ? 'border-red-400 focus:border-red-400 focus:ring-red-400 dark:border-red-500 dark:focus:border-red-500' 
                                             : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:focus:border-blue-500'"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
@@ -100,7 +100,7 @@
                             dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                             dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
 
-                            @if(registerForm.get('password')?.errors&&registerForm.get('password')?.touched){
+                            @if(registerForm.get('password')?.errors && registerForm.get('password')?.touched){
                                  <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
                                     <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
@@ -108,14 +108,14 @@
                                     <div>
                                     <span class="font-medium">Ensure that these requirements are met:</span>
                                         <ul class="mt-1.5 list-disc list-inside">
-                                            @if (registerForm.get('password')?.getError('pattern')) {
+                                            @if (registerForm.get('password')?.getError('pattern') || registerForm.get('password')?.touched ) {
                                                 <li>password must start with Capital char & at least 8 char up to 20 char </li>
                                             }
                                         
                                         
-                                    </ul>
+                                    </ul> 
                                     </div>
-                                </div>
+                                </div> 
                             }
                       
                            
