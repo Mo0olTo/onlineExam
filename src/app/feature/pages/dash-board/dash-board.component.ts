@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { FlowbiteService } from '../../../core/services/flowbite.service';
 import { AsyncPipe, isPlatformBrowser } from '@angular/common';
 import { SubjectsService } from '../../../shared/services/subjects/subjects.service';
@@ -6,9 +6,10 @@ import {  Store } from '@ngrx/store';
 import* as subjectsActions from '../../../store/subjects.actions';
 import* as subjectsSelctors from './../../../store/subjects.selctors';
 import { Observable } from 'rxjs';
-
+import * as examsSelectors from './../../../store/Exams/exams.selectors';
 import { Subject, SubjectsResponse } from '../../../store/subjects.model';
 import { RouterLink } from '@angular/router';
+import { Exam } from '../../../store/Exams/exams.modal';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class DashBoardComponent implements AfterViewInit ,OnInit {
   subjectList$!:Observable<Subject[]>
    getAllsubjectList$!:Observable<Subject[]>
    getAll:number=0
-
+  private allExams = signal<Exam[]>([]);
   
 
 
@@ -43,10 +44,13 @@ export class DashBoardComponent implements AfterViewInit ,OnInit {
 
     ngOnInit(): void {
         this.loadSubjects()
-      this.getAllSubjects() 
+      this.getAllSubjects()  
+
+          this.store.select(examsSelectors.selectAllExams).subscribe((exams) => {
+            this.allExams.set(exams);
    
        
-   
+          });
     }
 
 
